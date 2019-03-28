@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml" />
+
+    <springProfile name="dev">
+        <!--输出到文件-->
+        <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>appName_logType_logName.%d{yyyy-MM-dd}.log</fileNamePattern>
+                <maxHistory>15</maxHistory>
+            </rollingPolicy>
+            <encoder>
+                <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            </encoder>
+        </appender>
+        
+        <root level="INFO">
+            <appender-ref ref="CONSOLE" />
+            <appender-ref ref="FILE" />
+        </root>
+        <logger name="com.maoniunet" level="DEBUG"/>
+        <logger name="org.hibernate" level="INFO"/>
+        <logger name="org.hibernate.SQL" level="INFO"/>
+        <logger name="org.hibernate.type" level="INFO"/>
+        <logger name="org.apache.http" level="INFO"/>
+        <logger name="org.apache.http.wire" level="WARN"/>
+        <logger name="org.springframework" level="INFO" />
+        <logger name="org.atmosphere" level="TRACE"/>
+        <logger name="org.hibernate.stat" level="DEBUG" />
+        <logger name="io.swagger.models.parameters.AbstractSerializableParameter" level="ERROR" />
+        <logger name="com.netflix.discovery" level="OFF"/>
+    </springProfile>
+
+    <springProfile name="prod">
+        <!--输出到文件-->
+        <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>appName_logType_logName.%d{yyyy-MM-dd}.log</fileNamePattern>
+                <maxHistory>15</maxHistory>
+            </rollingPolicy>
+            <encoder>
+                <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            </encoder>
+        </appender>
+
+        <root level="WARN">
+            <appender-ref ref="CONSOLE" />
+            <appender-ref ref="FILE" />
+        </root>
+        <logger name="com.maoniunet" level="INFO"/>
+        <logger name="org.hibernate" level="WARN"/>
+        <logger name="org.hibernate.SQL" level="WARN"/>
+        <logger name="org.hibernate.type" level="WARN"/>
+        <logger name="org.apache.http" level="WARN"/>
+        <logger name="org.apache.http.wire" level="ERROR"/>
+        <logger name="org.springframework" level="WARN"/>
+        <logger name="com.zaxxer" level="WARN"/>
+        <logger name="org.glassfish" level="WARN"/>
+    </springProfile>
+
+</configuration>
